@@ -7,6 +7,28 @@ const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { isLoading, isError, data } = useGetHeroesQuery(currentPage);
 
+  let pagesCount,
+    btns = null;
+  if (data) {
+    pagesCount = Array(Math.round(data.count / 10));
+    pagesCount.fill('');
+    btns = pagesCount.map((page, index) => {
+      console.log(index + 1);
+      return (
+        <div
+          className={`pagination-btn${
+            index + 1 == currentPage ? ' current-page' : ''
+          }`}
+          onClick={() => {
+            setCurrentPage(index + 1);
+          }}
+        >
+          {index + 1}
+        </div>
+      );
+    });
+  }
+
   useEffect(() => {}, [currentPage]);
 
   return (
@@ -19,7 +41,7 @@ const MainPage = () => {
           })}
       </div>
       <div className="pagination">
-        <div className="pagination-btns">pagination</div>
+        <div className="pagination-btns">{data && btns}</div>
       </div>
     </div>
   );
