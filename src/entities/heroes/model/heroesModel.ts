@@ -1,4 +1,4 @@
-export interface IHeroe {
+export interface IHero {
   name: string;
   height: string;
   mass: string;
@@ -21,5 +21,5 @@ export interface ServerResponse {
   count: number;
   next: string;
   previous?: any;
-  results: IHeroe[];
+  results: IHero[];
 }
