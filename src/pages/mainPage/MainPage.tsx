@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import { useGetHeroesQuery } from '../../entities/heroes';
+import { useGetHeroesQuery } from '../../api';
 import HeroCard from '../../widgets/heroCard/HeroCard';
 import './MainPage.css';
 import { v1 } from 'uuid';
+import Loader from '../../shared/ui/loader/Loader';
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { isLoading, isError, data } = useGetHeroesQuery(currentPage);
   const heroId = (url: string) => {
+    const arr = url.split('/');
+    return arr[arr.length - 2];
+  };
+
+  const planetId = (url: string) => {
     const arr = url.split('/');
     return arr[arr.length - 2];
   };
@@ -38,27 +44,29 @@ const MainPage = () => {
 
   return (
     <div className="main-page">
-      <div className="container">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          data?.results.map((hero, index) => {
-            return (
-              <HeroCard
-                key={v1()}
-                hero={hero}
-                img={`https://starwars-visualguide.com/assets/img/characters/${
-                  heroId(hero.url)
-                  // currentPage == 1 ? index + 1 : 10 * currentPage + index + 1
-                }.jpg`}
-              />
-            );
-          })
-        )}
-      </div>
-      <div className="pagination">
-        <div className="pagination-btns">{data && btns}</div>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="container">
+            {data?.results.map((hero, index) => {
+              return (
+                <HeroCard
+                  key={v1()}
+                  hero={hero}
+                  img={`https://starwars-visualguide.com/assets/img/characters/${heroId(
+                    hero.url
+                  )}.jpg`}
+                  planetId={planetId(hero.homeworld)}
+                />
+              );
+            })}
+          </div>
+          <div className="pagination">
+            <div className="pagination-btns">{data && btns}</div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { heroesApi } from '../entities/heroes/api/heroes.api';
+import { heroesApi } from '../api/starWars.api';
 
 export const store = configureStore({
   reducer: {

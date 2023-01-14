@@ -17,7 +17,7 @@ export interface IHero {
   url: string;
 }
 
-export interface ServerResponse {
+export interface IHeroesResponse {
   count: number;
   next: string;
   previous?: any;
