@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IHeroesResponse } from './types/heroesTypes';
+import { IHeroesResponse, IHero } from './types/heroesTypes';
 import { IPlanet } from './types/planetsTypes';
 
 export const heroesApi = createApi({
@@ -19,7 +19,14 @@ export const heroesApi = createApi({
         url: `planets/${planetNumber}`,
       }),
     }),
+    searchHero: build.query<IHeroesResponse, string>({
+      query: (heroName: string) => ({
+        url: `people/`,
+        params: { search: heroName },
+      }),
+    }),
   }),
 });
 
-export const { useGetHeroesQuery, useGetPlanetQuery } = heroesApi;
+export const { useGetHeroesQuery, useGetPlanetQuery, useLazySearchHeroQuery } =
+  heroesApi;

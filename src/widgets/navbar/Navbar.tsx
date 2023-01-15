@@ -10,14 +10,6 @@ const Navbar = () => {
       <Link className="navbar-btn" to="/fhp">
         Любимые герои
       </Link>
-      <div className="navbar-search">
-        <input
-          type="text"
-          className="navbar-search"
-          placeholder="Введите имя героя"
-        />
-        <button>Искать</button>
-      </div>
     </div>
   );
 };

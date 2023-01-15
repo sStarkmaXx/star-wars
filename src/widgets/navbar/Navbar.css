@@ -14,29 +14,3 @@
   text-decoration: none;
   color: aliceblue;
 }
-
-.navbar-search {
-  display: flex;
-  width: 300px;
-  height: 30px;
-  border-radius: 15px;
-}
-
-.navbar-search > input {
-  padding: 0px 10px;
-  margin-right: 10px;
-  outline: none;
-}
-
-.navbar-search > button {
-  display: flex;
-  width: 90px;
-  height: 30px;
-  background-color: darkcyan;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 15px;
-  color: aliceblue;
-  cursor: pointer;
-}

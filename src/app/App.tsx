@@ -6,7 +6,7 @@ import FavHeroesPage from '../pages/favouritesHeroesPage/FavHeroesPage';
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Navbar />
       <Routes>
         <Route path="/" element={<MainPage />} />
