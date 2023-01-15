@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IHeroesResponse, IHero } from './types/heroesTypes';
+import { IHeroesResponse } from './types/heroesTypes';
 import { IPlanet } from './types/planetsTypes';
 
 export const heroesApi = createApi({

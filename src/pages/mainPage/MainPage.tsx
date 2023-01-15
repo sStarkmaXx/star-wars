@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import { useGetHeroesQuery } from '../../api';
+import { useGetHeroesQuery } from '../../store/api/starWars.api';
 import HeroCard from '../../widgets/heroCard/HeroCard';
 import './MainPage.css';
 import { v1 } from 'uuid';
 import Loader from '../../shared/ui/loader/Loader';
-import { useLazySearchHeroQuery } from '../../api/starWars.api';
+import { useLazySearchHeroQuery } from '../../store/api/starWars.api';
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
