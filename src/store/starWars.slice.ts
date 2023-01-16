@@ -1,15 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IHero } from './api/types/heroesTypes';
+import { localStorageNames } from '../shared/constants/localStorage';
 
 type StarWarsState = {
   favouritesHeroes: IHero[];
   filteredHeroes: IHero[];
 };
 
-export const FVH = 'favouritesHeroes';
-
 const initialState: StarWarsState = {
-  favouritesHeroes: JSON.parse(localStorage.getItem(FVH) ?? '[]'),
+  favouritesHeroes: JSON.parse(
+    localStorage.getItem(localStorageNames.favouritesHeroes) ?? '[]'
+  ),
   filteredHeroes: [],
 };
 
@@ -20,7 +21,7 @@ export const starWarsSlice = createSlice({
     addFavouritesHeroes(state, action: PayloadAction<IHero>) {
       state.favouritesHeroes.push(action.payload);
       localStorage.setItem(
-        'favouritesHeroes',
+        localStorageNames.favouritesHeroes,
         JSON.stringify(state.favouritesHeroes)
       );
     },
@@ -28,7 +29,10 @@ export const starWarsSlice = createSlice({
       state.favouritesHeroes = state.favouritesHeroes.filter(
         (hero) => hero.name !== action.payload.name
       );
-      localStorage.setItem(FVH, JSON.stringify(state.favouritesHeroes));
+      localStorage.setItem(
+        localStorageNames.favouritesHeroes,
+        JSON.stringify(state.favouritesHeroes)
+      );
     },
     filterHeroesByGender(state, action: PayloadAction<string>) {
       state.filteredHeroes = state.favouritesHeroes.filter(

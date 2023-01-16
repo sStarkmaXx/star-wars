@@ -4,8 +4,9 @@ import HeartSvg from '../../shared/ui/assets/svg/HeartSvg';
 import './HeroCard.css';
 import Loader from '../../shared/ui/loader/Loader';
 import { useDispatch } from 'react-redux';
-import { FVH, starWarsActions } from '../../store/starWars.slice';
+import { starWarsActions } from '../../store/starWars.slice';
 import { useState } from 'react';
+import { localStorageNames } from '../../shared/constants/localStorage';
 
 type HeroCardPropsType = {
   hero: IHero;
@@ -18,7 +19,7 @@ const HeroCard: React.FC<HeroCardPropsType> = ({ hero, img, planetId }) => {
   const { isLoading, data } = useGetPlanetQuery(planetId);
 
   const favouriteHeroes: IHero[] = JSON.parse(
-    localStorage.getItem(FVH) ?? '[]'
+    localStorage.getItem(localStorageNames.favouritesHeroes) ?? '[]'
   );
 
   let bool;

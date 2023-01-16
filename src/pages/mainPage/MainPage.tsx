@@ -5,23 +5,19 @@ import './MainPage.css';
 import { v1 } from 'uuid';
 import Loader from '../../shared/ui/loader/Loader';
 import { useLazySearchHeroQuery } from '../../store/api/starWars.api';
+import { getIdFromUrl } from '../../shared/utils/utils';
+import { localStorageNames } from '../../shared/constants/localStorage';
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const savedPageNumber = localStorage.getItem(localStorageNames.pageNumber);
+
+  const [currentPage, setCurrentPage] = useState<number>(
+    savedPageNumber ? Number(savedPageNumber) : 1
+  );
   const { isFetching, isError, data } = useGetHeroesQuery(currentPage);
   const [inputValue, setInputValue] = useState<string>('');
   const [searchHero, { isFetching: isSearchHero, data: searchedHero }] =
     useLazySearchHeroQuery();
-
-  const heroId = (url: string) => {
-    const arr = url.split('/');
-    return arr[arr.length - 2];
-  };
-
-  const planetId = (url: string) => {
-    const arr = url.split('/');
-    return arr[arr.length - 2];
-  };
 
   let pagesCount,
     dataForRender,
@@ -39,6 +35,10 @@ const MainPage = () => {
           }`}
           onClick={() => {
             setCurrentPage(index + 1);
+            localStorage.setItem(
+              localStorageNames.pageNumber,
+              String(index + 1)
+            );
           }}
         >
           {index + 1}
@@ -84,10 +84,10 @@ const MainPage = () => {
                     <HeroCard
                       key={v1()}
                       hero={hero}
-                      img={`https://starwars-visualguide.com/assets/img/characters/${heroId(
+                      img={`https://starwars-visualguide.com/assets/img/characters/${getIdFromUrl(
                         hero.url
                       )}.jpg`}
-                      planetId={planetId(hero.homeworld)}
+                      planetId={getIdFromUrl(hero.homeworld)}
                     />
                   );
                 })}

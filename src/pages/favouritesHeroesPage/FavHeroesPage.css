@@ -27,11 +27,7 @@
   font-weight: bold;
 }
 
-.сhoice-gender input[type='radio'] {
-  display: none;
-}
-
-.сhoice-gender label {
+.сhoice-gender-btn {
   display: inline-block;
   cursor: pointer;
   padding: 0px 15px;
@@ -42,12 +38,12 @@
   margin: 0 10px;
 }
 
-.сhoice-gender input[type='radio']:checked + label {
+.checked {
   background: teal;
   color: aliceblue;
 }
 
-.сhoice-gender label:hover {
+.сhoice-gender-btn:hover {
   background-color: darkcyan;
   color: aliceblue;
 }
